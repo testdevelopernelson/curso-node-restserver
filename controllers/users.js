@@ -5,7 +5,7 @@ const usersGet = (req, res = response) => {
     const query = req.query;
 
     res.json({
-        msg: 'get API controller',
+        msg: 'get API - controller ---',
         query
     });
 }

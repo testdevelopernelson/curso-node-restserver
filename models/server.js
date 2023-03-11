@@ -2,39 +2,43 @@ const express = require('express');
 const cors = require('cors');
 
 class Server {
-    
-    constructor(){
-        this.app = express();
+
+    constructor() {
+        this.app  = express();
         this.port = process.env.PORT;
-        this.usuariosRoutePath = '/api/usuarios';
-        //Middlewares
+        this.usuariosPath = '/api/usuarios';
+
+        // Middlewares
         this.middlewares();
 
-        //Rutas de la apliación
+        // Rutas de mi aplicación
         this.routes();
     }
 
     middlewares() {
-        //CORS
+
+        // CORS
         this.app.use( cors() );
 
-        //Lectura y parseo Body
+        // Lectura y parseo del body
         this.app.use( express.json() );
 
-        //Directorio público
-        this.app.use( express.static('public'));
+        // Directorio Público
+        this.app.use( express.static('public') );
+
     }
 
-    routes(){
-        
-        this.app.use( this.usuariosRoutePath,  require('../routes/users'));
+    routes() {
+        this.app.use( this.usuariosPath, require('../routes/users'));
     }
 
-    listen(){
-        this.app.listen(this.port, () => {
-            console.log('Servidor corriendo en puerto', this.port);
+    listen() {
+        this.app.listen( this.port, () => {
+            console.log('Servidor corriendo en puerto', this.port );
         });
     }
+
 }
+
 
 module.exports = Server;
